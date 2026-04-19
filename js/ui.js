@@ -13,22 +13,33 @@ export function initUI() {
             return;
         }
 
+        // Reset previous results
+        outputLog.textContent = '';
+        downloadLink.style.display = 'none';
         log('Starting combination process...');
+
         try {
-            const combinedPlaybook = await combinePlaybooks(files, log);
-            log('Combination complete!');
-            
-            const blob = new Blob([JSON.stringify(combinedPlaybook, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
+            // This now returns a Blob object
+            const archiveBlob = await combinePlaybooks(Array.from(files), log);
+
+            // Create a URL from the Blob
+            const url = URL.createObjectURL(archiveBlob);
+
+            // Set up the download link
             downloadLink.href = url;
-            downloadLink.download = 'combined_playbook.json';
+            downloadLink.download = 'combined_playbook.apbx'; // Set the desired filename
             downloadLink.style.display = 'block';
+            log('Your combined playbook is ready for download.');
+
         } catch (error) {
             log(`Error: ${error.message}`);
+            console.error(error); // Also log the full error to the console for debugging
         }
     });
 
     function log(message) {
         outputLog.textContent += message + '\n';
+        // Auto-scroll to the bottom
+        outputLog.scrollTop = outputLog.scrollHeight;
     }
 }
