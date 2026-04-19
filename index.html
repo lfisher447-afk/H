@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook Combiner</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Advanced Playbook Combiner</h1>
+    </header>
+    <main>
+        <section id="file-upload">
+            <h2>1. Upload Playbooks</h2>
+            <p>Select two or more <code>.apbx</code> files to combine.</p>
+            <input type="file" id="playbook-files" multiple accept=".apbx">
+            <button id="combine-btn">Combine</button>
+        </section>
+        <section id="configuration">
+            <h2>2. Advanced Configuration</h2>
+            <div id="config-options">
+                <!-- Configuration options will be dynamically added here -->
+            </div>
+        </section>
+        <section id="output">
+            <h2>3. Result</h2>
+            <pre id="output-log"></pre>
+            <a id="download-link" style="display:none;">Download Combined Playbook</a>
+        </section>
+    </main>
+    <script src="lib/js7z/js7z.js"></script>
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>
